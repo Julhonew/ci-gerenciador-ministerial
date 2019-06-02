@@ -1,0 +1,18 @@
+body{
+	padding: 0px;
+	margin: 0px;
+}
+
+.acender:hover{
+	background-color: #4682B4;
+	color: white;
+}
+
+
+#container{
+	width: 297mm;
+	height: 209.5mm;
+}
+
+
+
