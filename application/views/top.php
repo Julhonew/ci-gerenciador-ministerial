@@ -15,12 +15,12 @@
       <div class="fixed-top" id="barra_sup"></div>
 
         <div class="sidebar">
-          <b><a class="active" href="index.php">IMECO</a></b>
-            <a href="membros.php">Membros</a>
-            <a href="escalas.php">Escalas</a>
-            <a href="cartas.php">Cartas</a>
-            <a href="certificados.php">Certificados</a> 
-            <a href="diretoria.php">Diretoria</a>
-            <a href="atualizacoes.php">Atualizações</a>
+          <b><a class="active" href="<?php echo base_url('')?>">IMECO</a></b>
+            <a href="<?php echo base_url('membros') ?>">Membros</a>
+            <a href="<?php echo base_url('escalas')?>">Escalas</a>
+            <a href="<?php echo base_url('cartas')?>">Cartas</a>
+            <a href="<?php echo base_url('certificados')?>">Certificados</a> 
+            <a href="<?php echo base_url('diretoria')?>">Diretoria</a>
+            <a href="<?php echo base_url('atualizacoes')?>">Atualizações</a>
         </div>
 

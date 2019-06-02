@@ -1,5 +1,5 @@
 ﻿<?php 
-$this->load->view('top.php');
+
 
 // require_once('crud/select.php');
 // require_once('crud/delete.php');
@@ -60,4 +60,3 @@ $this->load->view('top.php');
 	</div>
 
 
-<?php $this->load->view('bot.php')?>
