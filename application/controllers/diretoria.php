@@ -1,14 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Diretoria extends CI_Controller {
-
-	function __construct(){
-		parent::__construct();
-		$this->load->helper('url');
-	}
+class Diretoria extends MY_Controller {
 
 	public function index(){
 		$this->load->view('diretoria');
 	}
+	
 }

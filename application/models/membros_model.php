@@ -1,14 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cartas extends MY_Controller {
+class Membros_model extends CI_Model {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->helper('url');
 	}
 
-	public function index(){
-		$this->load->view('cartas');
+	public function listar(){
+		$query = $this->db->get('membros');
+		return $query;
 	}
+
 }

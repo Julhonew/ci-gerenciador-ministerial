@@ -16,11 +16,11 @@
 
         <div class="sidebar">
           <b><a class="active" href="<?php echo base_url('')?>">IMECO</a></b>
-            <a href="<?php echo base_url('membros') ?>">Membros</a>
-            <a href="<?php echo base_url('escalas')?>">Escalas</a>
-            <a href="<?php echo base_url('cartas')?>">Cartas</a>
-            <a href="<?php echo base_url('certificados')?>">Certificados</a> 
-            <a href="<?php echo base_url('diretoria')?>">Diretoria</a>
-            <a href="<?php echo base_url('atualizacoes')?>">Atualizações</a>
+            <a href="<?php echo base_url('Membros') ?>">Membros</a>
+            <a href="<?php echo base_url('Escalas')?>">Escalas</a>
+            <a href="<?php echo base_url('Cartas')?>">Cartas</a>
+            <a href="<?php echo base_url('Certificados')?>">Certificados</a> 
+            <a href="<?php echo base_url('Diretoria')?>">Diretoria</a>
+            <a href="<?php echo base_url('Atualizacoes')?>">Atualizações</a>
         </div>
 

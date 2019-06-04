@@ -45,9 +45,9 @@
 							<td class="td-center"><p><?php echo "valor"?> </p></td>
 							<td class="td-center"><p><?php echo "valor"?> </p></td>
 							<td class="td-center">
-								<a href="credencial.php"><input class="btn btn-info" type="button" value="Credencial"></a>
-								<a href="editar_membro.php"><input class="btn btn-info" type="button" value="Editar"></a>
-								<a href="membros.php"><input class="btn btn-danger"  type="button" value="X"></a>
+								<a href="membros/credencial"><input class="btn btn-info" type="button" value="Credencial"></a>
+								<a href="membros/editar"><input class="btn btn-info" type="button" value="Editar"></a>
+								<a href="membros/excluir"><input class="btn btn-danger"  type="button" value="X"></a>
 							</td>
 						</tr>	
 
