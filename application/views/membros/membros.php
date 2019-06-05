@@ -33,10 +33,10 @@
 							<td class="td-center"><p><?php echo $dado->cargo; ?> </p></td>
 							<td class="td-center"><p><?php echo $dado->rg; ?> </p></td>
 							<td class="td-center"><p><?php echo $dado->cpf; ?> </p></td>
-							<td class="td-center"><p><?php echo $dado->data_nasc; ?> </p></td>
+							<td class="td-center"><p><?php echo implode('/', array_reverse(explode('-', $dado->data_nasc))); ?> </p></td>
 							<td class="td-center">
-								<a href="Membros/credencial"><input class="btn btn-info" type="button" value="Credencial"></a>
-								<a href="Membros/editarMembro"><input class="btn btn-info" type="button" value="Editar"></a>
+								<a href="<?php base_url('membros/credencial/'. $dado->id) ?>"><input class="btn btn-info" type="button" value="Credencial"></a>
+								<a href="Membros/editarMembro/<?php echo $dado->id ?>"><input class="btn btn-info" type="button" value="Editar"></a>
 								<a href="Membros/excluir"><input class="btn btn-danger"  type="button" value="X"></a>
 							</td>
 						</tr>	
