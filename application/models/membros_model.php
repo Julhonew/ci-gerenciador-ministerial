@@ -3,27 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Membros_model extends CI_Model {
 
-	function __construct(){
+	public function __construct(){
 		parent::__construct();
 	}
 
-	public function listar($id = false){
-		
-		var_dump($id);
+	public function listarTodos(){
+		return $this->db->get('membros');
+	}
 
-		if($id){
-			$query = $this->db->where('membros', array('id' => 1), $limit = NULL, $offset = NULL);
-		}else{
-			$query = $this->db->get('membros');
-		}
-
-		foreach ($query as $dados) {
-			echo $dados;
-		}
-
-		exit;
-
-		return $query;
+	public function listarUnico($id){
+		$sql = "SELECT * FROM membros WHERE id = '$id'";
+		$query = $this->db->query($sql);
+		return $query->result();
 	}
 
 	public function insert($data){
@@ -32,8 +23,13 @@ class Membros_model extends CI_Model {
 
 	public function update($id){
 
+		//
 
+	}
 
+	public function excluir($id){
+		$sql = "DELETE FROM membros WHERE id = $id;";
+		$this->db->query($sql);
 	}
 
 }

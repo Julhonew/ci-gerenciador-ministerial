@@ -3,24 +3,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Membros extends MY_Controller {
 
-	public function index(){
+	public function __construct(){
+	    parent::__construct();
 		$this->load->model('membros_model');
-		$data['membros'] = $this->membros_model->listar();
+	}
+
+	public function index(){
+		$data['membros'] = $this->membros_model->listarTodos();
 		$this->load->view('membros/membros', $data);
 	}
 
-	public function adicionarMembro(){
+	public function adicionar(){
 		$this->load->view('membros/adicionarMembro');
 	}
 
-	public function adicionarMembroValidacao(){
-		$this->load->model('membros_model');
-
+	public function validacao(){
 		if(isset($_FILES['img']) && $_FILES['img']['name'] != "" ){
 
 		$ext = strtolower(substr($_FILES['img']['name'], -4));
 		$novo_nome = md5(time()) . $ext;
-		$dir = 'assets/imagens/fotos';
+		$dir = 'assets/imagens/fotos/';
 
 		move_uploaded_file($_FILES['img']['tmp_name'], $dir.$novo_nome);
 
@@ -47,10 +49,14 @@ class Membros extends MY_Controller {
 		redirect('membros');
 	}
 
-	public function editarMembro(){
-		$this->load->model('membros_model');
-		$data['dados'] = $this->membros_model->listar($this->uri->segment(3));
+	public function editar(){
+		$data['dados'] = $this->membros_model->listarUnico($this->uri->segment(3));
 		$this->load->view('membros/editarMembro', $data);
+	}
+
+	public function excluir(){
+		$this->membros_model->excluir($this->uri->segment(3));
+		redirect('membros');
 	}
 	
 }

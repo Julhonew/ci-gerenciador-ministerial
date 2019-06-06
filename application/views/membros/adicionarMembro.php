@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-md-6 offset-md-4">
 		<h1 class="titulo">Cadastro de membros</h1>
-		<form action="adicionarMembroValidacao" method="POST" enctype="multipart/form-data">	
+		<form action="validacao" method="POST" enctype="multipart/form-data">	
 				<div class="col-md-4 offset-md-4 test">
 					<label for="formGroupExampleInput">Foto:</label></br>
 					<img id="visualizacao" src="<?php echo base_url('assets/imagens/fotos/default.jpg') ?>" ></br></br>

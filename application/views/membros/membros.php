@@ -7,7 +7,7 @@
 			<div class="titulo">
 				<ul>
 					<li><h1>Membros</h1></li>
-					<li class="float-right mt-2"><a href="Membros/adicionarMembro"><input type="button" class="btn btn-info " value="+ Adicionar"></a></li>
+					<li class="float-right mt-2"><a href="Membros/adicionar"><input type="button" class="btn btn-info " value="+ Adicionar"></a></li>
 				</ul>
 			</div>
 				
@@ -36,8 +36,8 @@
 							<td class="td-center"><p><?php echo implode('/', array_reverse(explode('-', $dado->data_nasc))); ?> </p></td>
 							<td class="td-center">
 								<a href="<?php base_url('membros/credencial/'. $dado->id) ?>"><input class="btn btn-info" type="button" value="Credencial"></a>
-								<a href="Membros/editarMembro/<?php echo $dado->id ?>"><input class="btn btn-info" type="button" value="Editar"></a>
-								<a href="Membros/excluir"><input class="btn btn-danger"  type="button" value="X"></a>
+								<a href="Membros/editar/<?php echo $dado->id ?>"><input class="btn btn-info" type="button" value="Editar"></a>
+								<a href="Membros/excluir/<?php echo $dado->id ?>"><input class="btn btn-danger"  type="button" value="X"></a>
 							</td>
 						</tr>	
 
