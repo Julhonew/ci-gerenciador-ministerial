@@ -3,7 +3,7 @@
 <div class="row">
 	<div class="col-md-6 offset-md-4">
 		<h1 class="titulo">Editar dados</h1>
-		<form action="crud/update.php" method="POST" enctype="multipart/form-data">
+		<form action="editar" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="id" value="<?php echo $dados[0]->id ?>">	
 				<div class="col-md-4 offset-md-4 test">
 					<label for="formGroupExampleInput">Foto:</label></br>
