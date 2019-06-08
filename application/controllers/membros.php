@@ -10,7 +10,7 @@ class Membros extends MY_Controller {
 
 	public function index(){
 		$data['membros'] = $this->membros_model->selectAll();
-		$this->load->view('membros/membros', $data);
+		$this->load->view('Membros/membros', $data);
 	}
 
 	public function adicionar(){
@@ -44,7 +44,7 @@ class Membros extends MY_Controller {
 		
 			$this->membros_model->insert($data);
 				
-			redirect('membros');		
+			redirect('Membros');		
 		}else{
 			$this->load->view('membros/adicionarMembro');
 		}
@@ -73,17 +73,37 @@ class Membros extends MY_Controller {
 			];
 
 			$this->membros_model->update($this->input->post('id'), $data, $foto);
-			redirect('membros');
+			redirect('Membros');
 		}
 				
 		
 		$data['dados'] = $this->membros_model->select($this->uri->segment(3));
-		$this->load->view('membros/editarMembro', $data);
+		$this->load->view('Membros/editarMembro', $data);
 	}
 
 	public function excluir(){
 		$this->membros_model->delete($this->uri->segment(3));
-		redirect('membros');
+		redirect('Membros');
 	}
 	
+	public function pdf(){
+		// Instancia a classe mPDF
+		$mpdf = new mPDF();
+		// Ao invés de imprimir a view 'welcome_message' na tela, passa o código
+		// HTML dela para a variável $html
+		$html = $this->load->view('welcome_message','',TRUE);
+		// Define um Cabeçalho para o arquivo PDF
+		$mpdf->SetHeader('Gerando PDF no CodeIgniter com a biblioteca mPDF');
+		// Define um rodapé para o arquivo PDF, nesse caso inserindo o número da
+		// página através da pseudo-variável PAGENO
+		$mpdf->SetFooter('{PAGENO}');
+		// Insere o conteúdo da variável $html no arquivo PDF
+		$mpdf->writeHTML($html);
+		// Cria uma nova página no arquivo
+		$mpdf->AddPage();
+		// Insere o conteúdo na nova página do arquivo PDF
+		$mpdf->WriteHTML('<p><b>Minha nova página no arquivo PDF</b></p>');
+		// Gera o arquivo PDF
+		$mpdf->Output();
+	}
 }

@@ -35,7 +35,7 @@
 							<td class="td-center"><p><?php echo $dado->cpf; ?> </p></td>
 							<td class="td-center"><p><?php echo implode('/', array_reverse(explode('-', $dado->data_nasc))); ?> </p></td>
 							<td class="td-center">
-								<a href="<?php base_url('membros/credencial/'. $dado->id) ?>"><input class="btn btn-info" type="button" value="Credencial"></a>
+								<a href="Membros/pdf/<?php echo $dado->id ?>?>"><input class="btn btn-info" type="button" value="Credencial"></a>
 								<a href="Membros/editar/<?php echo $dado->id ?>"><input class="btn btn-info" type="button" value="Editar"></a>
 								<a href="Membros/excluir/<?php echo $dado->id ?>"><input class="btn btn-danger"  type="button" value="X"></a>
 							</td>
