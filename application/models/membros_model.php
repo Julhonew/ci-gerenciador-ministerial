@@ -57,4 +57,13 @@ class Membros_model extends CI_Model {
 		$this->db->query($sql);
 	}
 
+	public function getByGroup($ids){
+
+		$sql = "SELECT * FROM membros WHERE id IN($ids);";
+
+		$result = $this->db->query($sql);
+
+		return $result->result();
+	}
+
 }

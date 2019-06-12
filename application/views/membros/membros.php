@@ -27,15 +27,15 @@
 					foreach($membros->result() as $dado) {
 					?>
 						<tr>
-							<form action="Membros/credencialMultiplas" method="POST">
-							<td class="td-center"><input type="checkbox" name="id" value=""></td>
+							<form action="Membros/credencial" method="POST">
+							<td class="td-center"><input type="checkbox" name="id[]" value="<?php echo $dado->id; ?>"></td>
 							<td class="td-center"><p><?php echo $dado->nome; ?> </p></td>
 							<td class="td-center"><p><?php echo $dado->cargo; ?> </p></td>
 							<td class="td-center"><p><?php echo $dado->rg; ?> </p></td>
 							<td class="td-center"><p><?php echo $dado->cpf; ?> </p></td>
 							<td class="td-center"><p><?php echo implode('/', array_reverse(explode('-', $dado->data_nasc))); ?> </p></td>
 							<td class="td-center">
-								<a href="Membros/pdf/<?php echo $dado->id ?>?>"><input class="btn btn-info" type="button" value="Credencial"></a>
+								<a href="Membros/credencial/<?php echo $dado->id ?>?>"><input class="btn btn-info" type="button" value="Credencial"></a>
 								<a href="Membros/editar/<?php echo $dado->id ?>"><input class="btn btn-info" type="button" value="Editar"></a>
 								<a href="Membros/excluir/<?php echo $dado->id ?>"><input class="btn btn-danger"  type="button" value="X"></a>
 							</td>
