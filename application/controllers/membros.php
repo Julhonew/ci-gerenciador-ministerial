@@ -92,7 +92,7 @@ class Membros extends MY_Controller {
 
 		if(empty($arrId['id'])){
 			$erro = 1;
-			redirect('Membros', $erro);		
+			// redirect('Membros', $erro);		
 		}
 
 		if(is_array($arrId)){

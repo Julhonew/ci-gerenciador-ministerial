@@ -35,12 +35,11 @@
 							<td class="td-center"><p><?php echo $dado->cpf; ?> </p></td>
 							<td class="td-center"><p><?php echo implode('/', array_reverse(explode('-', $dado->data_nasc))); ?> </p></td>
 							<td class="td-center">
-								<a href="Membros/credencial/<?php echo $dado->id ?>?>"><input class="btn btn-info" type="button" value="Credencial"></a>
+								<a href="Membros/credencial/<?php echo $dado->id ?>" onClick="window.open(this.href,'credencial','resizable,height=800,width=800'); return false;"><input class="btn btn-info" type="button" value="Credencial"></a>
 								<a href="Membros/editar/<?php echo $dado->id ?>"><input class="btn btn-info" type="button" value="Editar"></a>
 								<a href="Membros/excluir/<?php echo $dado->id ?>"><input class="btn btn-danger"  type="button" value="X"></a>
 							</td>
 						</tr>	
-
 				    <?php } ?> 
 			</table>	
 			<input type="submit" class="form-control btn btn-info" name="imprimir" value="imprimir">
