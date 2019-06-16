@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 16-Jun-2019 às 04:15
+-- Generation Time: 16-Jun-2019 às 05:02
 -- Versão do servidor: 10.1.37-MariaDB
 -- versão do PHP: 7.3.0
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `imeco`
 --
+CREATE DATABASE IF NOT EXISTS `imeco` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `imeco`;
 
 -- --------------------------------------------------------
 

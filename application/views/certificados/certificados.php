@@ -19,13 +19,13 @@
 						<td class="td-center bold"><p>Ações</p></td>
 					</tr>	
 					<?php
-					foreach($certificados->result() as $certificado) {
+					foreach($certificados as $certificado) {
 					?>
 						<tr>
 							<form action="Membros/credencial" method="POST">
-							<td class="td-center"><p><?php echo $certificado->nome; ?> </p></td>
+							<td class="td-center"><p><?php echo $certificado->nome; ?></p></td>
 							<td class="td-center">
-								<a href="Membros/editar/<?php echo $certificado->id ?>"><input class="btn btn-info" type="button" value="Ver todos"></a>
+								<a href="Certificados/tipoCertificados/<?php echo $certificado->id; ?>"><input class="btn btn-info" type="button" value="Ver todos"></a>
 							</td>
 						</tr>	
 				    <?php } ?> 

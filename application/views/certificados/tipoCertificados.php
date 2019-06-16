@@ -22,7 +22,7 @@
 						<td class="td-center"><p>Acões</p></td>
 					</tr>	
 					<?php
-					foreach($certificados->result() as $certificado) {
+					foreach($certificados as $certificado) {
 					?>
 						<tr>
 							<form action="Membros/credencial" method="POST">
