@@ -8,7 +8,13 @@ class Membros_model extends CI_Model {
 	}
 
 	public function selectAll(){
-		return $this->db->get('membros');
+		$sql = "SELECT a.id, a.nome, b.cargo, a.data_nasc, a.rg, a.cpf, a.emissao, a.foto 
+				from membros a
+				inner join cargos b on (a.cargo = b.id);";
+
+		$result = $this->db->query($sql);
+
+		return $result->result();
 	}
 
 	public function select($id){
@@ -64,6 +70,11 @@ class Membros_model extends CI_Model {
 		$result = $this->db->query($sql);
 
 		return $result->result();
+	}
+
+	public function getAllCargos(){
+		$query = $this->db->get('cargos');
+		return $query->result();
 	}
 
 }

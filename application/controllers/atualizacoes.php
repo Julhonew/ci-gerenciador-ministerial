@@ -9,6 +9,6 @@ class Atualizacoes extends MY_Controller {
 	}
 
 	public function index(){
-		$this->load->view('atualizacoes');
+		$this->load->view('atualizacoes/atualizacoes');
 	}
 }

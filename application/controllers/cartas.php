@@ -9,6 +9,6 @@ class Cartas extends MY_Controller {
 	}
 
 	public function index(){
-		$this->load->view('cartas');
+		$this->load->view('cartas/cartas');
 	}
 }

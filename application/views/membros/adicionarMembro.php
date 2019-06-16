@@ -24,16 +24,9 @@
 			   <div class="form-group col-md-4">
 				    <label for="formGroupExampleInput">Cargo:</label>
 				   	<select class="form-control" name="cargo">
-					    	<option>Membro</option>
-					    	<option>Cooperador</option>
-					    	<option>Cooperadora</option>
-					    	<option>Diacono</option>
-					    	<option>Diaconiza</option>
-					    	<option>Missionaria</option>
-					    	<option>Missionario</option>
-					    	<option>Presbitero</option>
-					    	<option>Pastor</option>
-					    	<option>Pastora</option>
+				   		<?php foreach ($cargos as $cargo) {?>
+				   			<option value="<?php echo $cargo->id;?>"><?php echo $cargo->cargo;?></option>
+					    <?php } ?>
 					</select>
 			    </div>
 

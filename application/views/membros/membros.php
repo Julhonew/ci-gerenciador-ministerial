@@ -1,4 +1,6 @@
-<?php $this->load->view('top')?>
+<?php $this->load->view('top');
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 
 <div class="row col-md-12 ml-2">
 		<div class="col-md-2 "></div>
@@ -24,7 +26,7 @@
 						<td class="td-center"><p>Acões</p></td>
 					</tr>	
 					<?php
-					foreach($membros->result() as $dado) {
+					foreach($membros as $dado) {
 					?>
 						<tr>
 							<form action="Membros/credencial" method="POST">

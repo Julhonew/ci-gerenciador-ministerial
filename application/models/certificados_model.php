@@ -7,8 +7,8 @@ class Certificados_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function listar(){
-		$query = $this->db->get('certificados');
+	public function selectAll(){
+		$query = $this->db->get('tipo_cert');
 		return $query;
 	}
 

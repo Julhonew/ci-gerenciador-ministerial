@@ -16,6 +16,7 @@ class Membros extends MY_Controller {
 	public function adicionar(){
 
 		if($this->input->post()){
+			
 			if(isset($_FILES['img']) && $_FILES['img']['name'] != "" ){
 
 				$ext = strtolower(substr($_FILES['img']['name'], -4));
@@ -46,7 +47,8 @@ class Membros extends MY_Controller {
 				
 			redirect('Membros');		
 		}else{
-			$this->load->view('membros/adicionarMembro');
+			$data['cargos'] = $this->membros_model->getAllCargos();
+			$this->load->view('membros/adicionarMembro', $data);
 		}
 
 	}
@@ -78,12 +80,17 @@ class Membros extends MY_Controller {
 				
 		
 		$data['dados'] = $this->membros_model->select($this->uri->segment(3));
+		$data['cargos'] = $this->membros_model->getAllCargos();
 		$this->load->view('Membros/editarMembro', $data);
 	}
 
 	public function excluir(){
-		$this->membros_model->delete($this->uri->segment(3));
-		redirect('Membros');
+		if($this->membros_model->delete($this->uri->segment(3))){
+			redirect('Membros');	
+		}else{
+			redirect('Membros', $erro);	
+		}
+		
 	}
 	
 	public function credencial(){
@@ -92,7 +99,7 @@ class Membros extends MY_Controller {
 
 		if(empty($arrId['id'])){
 			$erro = 1;
-			// redirect('Membros', $erro);		
+				
 		}
 
 		if(is_array($arrId)){

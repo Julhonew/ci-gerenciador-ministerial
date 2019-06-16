@@ -5,8 +5,8 @@ class Certificados extends MY_Controller {
 
 	public function index(){
 		$this->load->model('certificados_model');
-		$data['certificados'] = $this->certificados_model->listar();
-		$this->load->view('certificados');
+		$data['certificados'] = $this->certificados_model->selectAll();
+		$this->load->view('certificados/certificados', $data);
 	}
 
 }

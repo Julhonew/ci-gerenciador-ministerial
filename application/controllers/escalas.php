@@ -9,6 +9,6 @@ class Escalas extends MY_Controller {
 	}
 
 	public function index(){
-		$this->load->view('escalas');
+		$this->load->view('escalas/escalas');
 	}
 }
