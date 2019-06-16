@@ -1,4 +1,9 @@
-<?php $this->load->view('top.php') ?>
+<?php 
+	// echo "<pre>";
+	// var_dump($dados[0]->cargo);
+	// var_dump($cargos[2]->id);
+	// exit;
+$this->load->view('top.php') ?>
 
 <div class="row">
 	<div class="col-md-6 offset-md-4">
@@ -25,17 +30,12 @@
 
 			   <div class="form-group col-md-4">
 				    <label for="formGroupExampleInput">Cargo:</label>
-				   	<select class="form-control" name="cargo" value="<?php echo $dados[0]->cargo ?>">
-					    	<option>Membro</option>
-					    	<option>Cooperador</option>
-					    	<option>Cooperadora</option>
-					    	<option>Diacono</option>
-					    	<option>Diaconiza</option>
-					    	<option>Missionaria</option>
-					    	<option>Missionario</option>
-					    	<option>Presbitero</option>
-					    	<option>Pastor</option>
-					    	<option>Pastora</option>
+				   	<select class="form-control" name="cargo" >
+					    	<?php foreach ($cargos as $cargo) {?>
+				   			<option value="<?php echo $cargo->id;?>"
+				   					<?php if($dados[0]->cargo == $cargo->id){echo "selected";}?>
+				   				><?php echo $cargo->cargo;?></option>
+					    <?php } ?>
 					</select>
 			    </div>
 

@@ -99,6 +99,7 @@ class Membros extends MY_Controller {
 
 		if(empty($arrId['id'])){
 			$erro = 1;
+				
 		}
 
 		if(is_array($arrId)){

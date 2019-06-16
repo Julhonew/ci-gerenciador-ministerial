@@ -18,12 +18,8 @@ class Membros_model extends CI_Model {
 	}
 
 	public function select($id){
-		$sql = "SELECT a.id, a.nome, b.cargo, a.data_nasc, a.rg, a.cpf, a.emissao, a.foto 
-				from membros a
-				inner join cargos b on (a.cargo = b.id)
-				where a.id = $id;";
-
-		$query = $this->db->query($sql);
+		$this->db->where('id', $id);
+		$query = $this->db->get('membros');
 		return $query->result();
 	}
 
