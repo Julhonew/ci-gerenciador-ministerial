@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="<?php echo base_url('assets\script\meu_script.js')?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('assets\nodes_modules\jquery\dist\jquery.js')?>"></script>
 
+
 </head>
 <body>
 	<div class="container-fluid zeraMargem" id="test">

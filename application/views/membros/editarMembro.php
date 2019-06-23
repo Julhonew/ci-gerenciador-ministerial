@@ -1,9 +1,4 @@
-<?php 
-	// echo "<pre>";
-	// var_dump($dados[0]->cargo);
-	// var_dump($cargos[2]->id);
-	// exit;
-$this->load->view('top.php') ?>
+<?php $this->load->view('top.php'); ?>
 
 <div class="row">
 	<div class="col-md-6 offset-md-4">
@@ -33,7 +28,7 @@ $this->load->view('top.php') ?>
 				   	<select class="form-control" name="cargo" >
 					    	<?php foreach ($cargos as $cargo) {?>
 				   			<option value="<?php echo $cargo->id;?>"
-				   					<?php if($dados[0]->cargo == $cargo->id){echo "selected";}?>
+				   					<?php if($dados[0]->cargo == $cargo->cargo){echo "selected";}?>
 				   				><?php echo $cargo->cargo;?></option>
 					    <?php } ?>
 					</select>

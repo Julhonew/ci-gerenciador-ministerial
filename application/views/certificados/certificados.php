@@ -7,12 +7,10 @@
 			<div class="titulo">
 				<ul>
 					<li><h1>Certificados</h1></li>
-					<li class="float-right mt-2"><a href="Membros/adicionar"><input type="button" class="btn btn-info " value="Cadastrar tipo"></a></li>
+					<li class="float-right mt-2"><a href="Certificados/cadastrarTipo"><input type="button" class="btn btn-info " value="Cadastrar tipo"></a></li>
 				</ul>
 			</div>
 				
-				
-
 			<table class="table"  border="1">
 					<tr>
 						<td class="td-center bold"><p>Tipo</p></td>
@@ -23,7 +21,7 @@
 					?>
 						<tr>
 							<form action="Membros/credencial" method="POST">
-							<td class="td-center"><p><?php echo $certificado->nome; ?></p></td>
+							<td class="td-center"><p><?php echo $certificado->tipo; ?></p></td>
 							<td class="td-center">
 								<a href="Certificados/tipoCertificados/<?php echo $certificado->id; ?>"><input class="btn btn-info" type="button" value="Ver todos"></a>
 							</td>

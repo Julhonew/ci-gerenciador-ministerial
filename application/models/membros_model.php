@@ -18,8 +18,13 @@ class Membros_model extends CI_Model {
 	}
 
 	public function select($id){
-		$this->db->where('id', $id);
-		$query = $this->db->get('membros');
+		$sql = "SELECT a.id, a.nome, b.cargo, a.data_nasc, a.rg, a.cpf, a.emissao, a.foto 
+				from membros a
+				inner join cargos b on (a.cargo = b.id)
+				WHERE a.id = $id;";
+
+		$query = $this->db->query($sql);
+
 		return $query->result();
 	}
 
@@ -55,17 +60,21 @@ class Membros_model extends CI_Model {
 
 		$membros = $this->select($id);
 
-		if($membros[0]->foto != "default.jpg"){
-			unlink('assets/imagens/fotos/'.$membros[0]->foto);
+		if(!empty($membros[0]->foto)){
+			if($membros[0]->foto != "default.jpg"){
+				unlink('assets/imagens/fotos/'.$membros[0]->foto);
+			}
 		}
-
 		$sql = "DELETE FROM membros WHERE id = $id;";
 		$this->db->query($sql);
 	}
 
 	public function getByGroup($ids){
 
-		$sql = "SELECT * FROM membros WHERE id IN($ids);";
+		$sql = "SELECT a.id, a.nome, b.cargo, a.data_nasc, a.rg, a.cpf, a.emissao, a.foto 
+				from membros a
+				inner join cargos b on (a.cargo = b.id)
+				where a.id IN($ids);";
 
 		$result = $this->db->query($sql);
 

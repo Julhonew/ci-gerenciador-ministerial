@@ -141,4 +141,12 @@ li{
   }
 }
 
-/*///////membros////////*/
+
+/*CERTIFICADO*/
+
+.aviso{
+  width: 78%;
+  height: auto;
+  background-color: white;
+  padding: 5px;
+}

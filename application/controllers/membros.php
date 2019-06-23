@@ -97,12 +97,10 @@ class Membros extends MY_Controller {
 		
 		$arrId = !empty($this->input->post()) ? $this->input->post() : (int) $this->uri->segment(3);
 
-		if(empty($arrId['id'])){
-			$erro = 1;
-				
-		}
-
 		if(is_array($arrId)){
+			if(empty($arrId['id'])){
+			redirect('Membros');	
+		}
 			$data['dados'] = $this->membros_model->getByGroup(implode(',', $arrId['id']));
 		}else{
 			$data['dados'] = $this->membros_model->select($arrId);
