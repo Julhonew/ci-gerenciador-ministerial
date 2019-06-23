@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 16-Jun-2019 às 05:02
+-- Generation Time: 23-Jun-2019 às 04:22
 -- Versão do servidor: 10.1.37-MariaDB
 -- versão do PHP: 7.3.0
 
@@ -65,16 +65,19 @@ CREATE TABLE `certificados` (
   `mae` varchar(255) DEFAULT NULL,
   `pai` varchar(255) DEFAULT NULL,
   `dt_apr` date DEFAULT NULL,
-  `tipo_cert` varchar(50) DEFAULT NULL
+  `tipo_cert` varchar(50) DEFAULT NULL,
+  `cargo` varchar(255) DEFAULT NULL,
+  `emissao` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `texto_cert` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `certificados`
 --
 
-INSERT INTO `certificados` (`id`, `nome`, `sexo`, `dt_nasc`, `mae`, `pai`, `dt_apr`, `tipo_cert`) VALUES
-(1, 'Julho Justino Sales', 'Masculino', '1996-06-09', 'Maria', 'Manoel', '2019-04-14', '1'),
-(2, 'Aline', 'Feminino', '1993-02-06', 'Genilda', '----', '2019-04-14', '2');
+INSERT INTO `certificados` (`id`, `nome`, `sexo`, `dt_nasc`, `mae`, `pai`, `dt_apr`, `tipo_cert`, `cargo`, `emissao`, `texto_cert`) VALUES
+(1, 'Julho Justino Sales', 'Masculino', '1996-06-09', 'Maria', 'Manoel', '2019-04-14', '1', NULL, '2019-06-17 01:45:39', NULL),
+(2, 'Aline', 'Feminino', '1993-02-06', 'Genilda', '----', '2019-04-14', '2', NULL, '2019-06-17 01:45:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -93,15 +96,20 @@ CREATE TABLE `membros` (
   `foto` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Extraindo dados da tabela `membros`
+-- Estrutura da tabela `texto_cert`
 --
 
-INSERT INTO `membros` (`id`, `nome`, `cargo`, `data_nasc`, `rg`, `cpf`, `emissao`, `foto`) VALUES
-(4, 'Julho Justino Sales', '1', '0000-00-00', '000000000', '46559497836', '2019-06-15 18:54:05', 'default.jpg'),
-(5, 'Aline Liur Justino', '2', '0000-00-00', '000000000', '00000000000', '2019-06-16 01:10:31', 'default.jpg'),
-(6, 'Clarice Justino de Sales Rodriguez', '3', '0000-00-00', '000000000', '00000000000', '2019-06-16 01:10:42', 'default.jpg'),
-(7, 'Julho Justino Sales', '1', '0000-00-00', '000000000', '00000000000', '2019-06-16 01:43:22', 'default.jpg');
+CREATE TABLE `texto_cert` (
+  `id` int(11) NOT NULL,
+  `id_cert` int(11) DEFAULT NULL,
+  `fonte` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cor` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tamanho` int(3) DEFAULT NULL,
+  `estilo` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -111,21 +119,46 @@ INSERT INTO `membros` (`id`, `nome`, `cargo`, `data_nasc`, `rg`, `cpf`, `emissao
 
 CREATE TABLE `tipo_cert` (
   `id` int(11) NOT NULL,
-  `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+  `tipo` varchar(55) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `tipo_cert`
 --
 
-INSERT INTO `tipo_cert` (`id`, `nome`) VALUES
+INSERT INTO `tipo_cert` (`id`, `tipo`) VALUES
 (1, 'Apresentação'),
 (2, 'Batismo'),
 (3, 'Cooperador'),
 (4, 'Diacono/Diaconiza'),
 (5, 'Missionario(a)'),
 (6, 'Presbitero'),
-(7, 'Pastor(a)');
+(7, 'Pastor(a)'),
+(8, 'teste');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `titulos_cert`
+--
+
+CREATE TABLE `titulos_cert` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(55) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `descricao` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Extraindo dados da tabela `titulos_cert`
+--
+
+INSERT INTO `titulos_cert` (`id`, `nome`, `descricao`) VALUES
+(1, '{{1ºpastorPresidente}}', ': Adiciona o nome do 1º Pastor Presidente'),
+(2, '{{2ºpastorPresidente}}', ': Adiciona o nome do 2º Pastor Presidente'),
+(3, '{{1ºsecretario(a)}}', ': Adiciona o nome do 1º Secretario(a)'),
+(4, '{{2ºsecretario(a)}}', ': Adiciona o nome do 2º Secretario(a)'),
+(5, '{{tesoureiro(a)}}', ': Adiciona o nome do Tesoureiro(a)'),
+(6, '{{nome}}', ': Adiciona o nome do comtemplado do certificado');
 
 --
 -- Indexes for dumped tables
@@ -150,9 +183,21 @@ ALTER TABLE `membros`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `texto_cert`
+--
+ALTER TABLE `texto_cert`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tipo_cert`
 --
 ALTER TABLE `tipo_cert`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `titulos_cert`
+--
+ALTER TABLE `titulos_cert`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -175,13 +220,25 @@ ALTER TABLE `certificados`
 -- AUTO_INCREMENT for table `membros`
 --
 ALTER TABLE `membros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `texto_cert`
+--
+ALTER TABLE `texto_cert`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tipo_cert`
 --
 ALTER TABLE `tipo_cert`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `titulos_cert`
+--
+ALTER TABLE `titulos_cert`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
