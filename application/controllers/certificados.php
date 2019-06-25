@@ -13,12 +13,60 @@ class Certificados extends MY_Controller {
 		$this->load->view('certificados/certificados', $data);
 	}
 
+	public function verifCheckbox($count, $checkbox = []){
+		if($checkbox){
+			for($i = 0; $i < $count; $i++){
+				$arrChecks[$i] = 0;
+				$data[$i] = 0;
+			}
+
+			$i = 0;
+			foreach ($arrChecks as $key => $value) {
+				if(isset($checkbox[$i])){
+					$data[$checkbox[$i] - 1] = 1;
+				}
+				$i++;
+			}
+
+			return $data;
+		}else{
+			for($i = 0; $i < $count; $i++){
+				$data[$i] = 0;
+			}
+
+			return $data;
+		}
+		
+	}
+
 	public function cadastrarTipo(){
 		if($this->input->post()){
 
-			echo "<pre>";
-			var_dump($this->input->post());
-			exit;
+			$post = $this->input->post();
+			$negrito = !empty($post['negrito']) ? $post['negrito'] : false;
+			$italic = !empty($post['italic']) ? $post['italic'] : false;
+			$sublinhado = !empty($post['sublinhado']) ? $post['sublinhado'] : false;
+
+			$count = count($post['fonte']);
+
+			$params['fonte'] = $post['fonte'];
+			$params['cor'] = $post['cor'];
+			$params['tamanho'] = $post['tamanho'];   
+			$params['negrito'] = $this->verifCheckbox($count, $negrito);
+			$params['italic'] = $this->verifCheckbox($count, $italic);
+			$params['sublinhado'] = $this->verifCheckbox($count, $sublinhado);
+			$params['texto'] = $post['editor'];		
+
+			for ($i=0; $i < $count; $i++) { 
+				$texto_cert[$i]=[
+					'fonte' 	=> $params['fonte'][$i],
+					'cor'		=> $params['cor'][$i],
+					'tamanho'	=> $params['tamanho'][$i],
+					'negrito'	=> $params['negrito'][$i],
+					'italic'	=> $params['italic'][$i],
+					'sublinhado'=> $params['sublinhado'][$i]
+				];
+			}
 
 			if(isset($_FILES['imagem']) && $_FILES['imagem']['name'] != "" ){
 
@@ -31,7 +79,14 @@ class Certificados extends MY_Controller {
 				$imagem = $novo_nome;
 			}
 
+			$tipo_cert['tipo'] = $post['nome'];
+			$tipo_cert['img'] = $imagem;
+			$tipo_cert['texto'] = $post['editor'];	
+
+			$this->certificados_model->save($tipo_cert,$texto_cert);
 			
+			redirect('certificados');
+
 		}else{
 
 			$data['titulos'] = $this->certificados_model->getTitulosCert();

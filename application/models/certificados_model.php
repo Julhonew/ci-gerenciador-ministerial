@@ -31,16 +31,33 @@ class Certificados_model extends CI_Model {
 		return $result->result();
 	}
 
-	public function save(){
+	public function save($tipo_cert,$texto_cert){
 
-		$sql1 = "";
-		$sql2 = "";
+		$this->db->insert('tipo_cert', $tipo_cert);
+		$id_cert = $this->db->insert_id('tipo_cert');
+		
+		foreach ($texto_cert as $titulo) {
+			$count = 0;
+			$tamanho = count($titulo) + 1;
+			foreach ($titulo as $key => $value){
+				if($count == 0){
+					$valores = $id_cert. ",";
+					$valores .= "'".$value. "'";	
+				}else if ($count < $tamanho && $count != 0){
+					if(!is_numeric($value)){
+						$valores .= ",". "'".$value."'";
+					}else{
+						$valores .= ','.$value ;
+					}
+				}
+			    $count++;
+			}
 
-		$this->db->trans_start();
-		$this->db->query('AN SQL QUERY...');
-		$this->db->query('ANOTHER QUERY...');
-		$this->db->query('AND YET ANOTHER QUERY...');
-		$this->db->trans_complete();
+			$sql = "INSERT INTO texto_cert (id_cert,fonte,cor,tamanho,negrito,italic,sublinhado)
+											VALUES($valores);";
+			$this->db->query($sql);
+		}
+
 	}
 
 }

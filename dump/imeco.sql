@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 23-Jun-2019 às 04:22
+-- Generation Time: 25-Jun-2019 às 06:26
 -- Versão do servidor: 10.1.37-MariaDB
 -- versão do PHP: 7.3.0
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `imeco`
 --
-CREATE DATABASE IF NOT EXISTS `imeco` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `imeco`;
 
 -- --------------------------------------------------------
 
@@ -71,14 +69,6 @@ CREATE TABLE `certificados` (
   `texto_cert` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `certificados`
---
-
-INSERT INTO `certificados` (`id`, `nome`, `sexo`, `dt_nasc`, `mae`, `pai`, `dt_apr`, `tipo_cert`, `cargo`, `emissao`, `texto_cert`) VALUES
-(1, 'Julho Justino Sales', 'Masculino', '1996-06-09', 'Maria', 'Manoel', '2019-04-14', '1', NULL, '2019-06-17 01:45:39', NULL),
-(2, 'Aline', 'Feminino', '1993-02-06', 'Genilda', '----', '2019-04-14', '2', NULL, '2019-06-17 01:45:39', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -108,7 +98,9 @@ CREATE TABLE `texto_cert` (
   `fonte` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cor` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tamanho` int(3) DEFAULT NULL,
-  `estilo` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL
+  `negrito` int(1) DEFAULT '0',
+  `italic` int(1) DEFAULT '0',
+  `sublinhado` int(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -119,22 +111,10 @@ CREATE TABLE `texto_cert` (
 
 CREATE TABLE `tipo_cert` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(55) COLLATE utf8_unicode_ci DEFAULT NULL
+  `tipo` varchar(55) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `img` varchar(55) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `texto` longtext COLLATE utf8_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Extraindo dados da tabela `tipo_cert`
---
-
-INSERT INTO `tipo_cert` (`id`, `tipo`) VALUES
-(1, 'Apresentação'),
-(2, 'Batismo'),
-(3, 'Cooperador'),
-(4, 'Diacono/Diaconiza'),
-(5, 'Missionario(a)'),
-(6, 'Presbitero'),
-(7, 'Pastor(a)'),
-(8, 'teste');
 
 -- --------------------------------------------------------
 
@@ -153,12 +133,12 @@ CREATE TABLE `titulos_cert` (
 --
 
 INSERT INTO `titulos_cert` (`id`, `nome`, `descricao`) VALUES
-(1, '{{1ºpastorPresidente}}', ': Adiciona o nome do 1º Pastor Presidente'),
-(2, '{{2ºpastorPresidente}}', ': Adiciona o nome do 2º Pastor Presidente'),
-(3, '{{1ºsecretario(a)}}', ': Adiciona o nome do 1º Secretario(a)'),
-(4, '{{2ºsecretario(a)}}', ': Adiciona o nome do 2º Secretario(a)'),
-(5, '{{tesoureiro(a)}}', ': Adiciona o nome do Tesoureiro(a)'),
-(6, '{{nome}}', ': Adiciona o nome do comtemplado do certificado');
+(1, '{{1ºpastorPresidente}}', ' : Adiciona o nome do 1º Pastor Presidente'),
+(2, '{{2ºpastorPresidente}}', ' : Adiciona o nome do 2º Pastor Presidente'),
+(3, '{{1ºsecretario(a)}}', ' : Adiciona o nome do 1º Secretario(a)'),
+(4, '{{2ºsecretario(a)}}', ' : Adiciona o nome do 2º Secretario(a)'),
+(5, '{{tesoureiro(a)}}', ' : Adiciona o nome do Tesoureiro(a)'),
+(6, '{{nome}}', ' : Adiciona o nome do comtemplado do certificado');
 
 --
 -- Indexes for dumped tables
@@ -214,7 +194,7 @@ ALTER TABLE `cargos`
 -- AUTO_INCREMENT for table `certificados`
 --
 ALTER TABLE `certificados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `membros`
@@ -232,7 +212,7 @@ ALTER TABLE `texto_cert`
 -- AUTO_INCREMENT for table `tipo_cert`
 --
 ALTER TABLE `tipo_cert`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `titulos_cert`

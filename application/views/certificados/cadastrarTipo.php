@@ -9,7 +9,7 @@
 
 			    <div class="form-group col-md-8">
 				    <label for="formGroupExampleInput">Nome:</label>
-				    <input type="text" class="form-control" name="nome" placeholder="Nome do Tipo" required>
+				    <input type="text" class="form-control" name="nome" placeholder="Nome do Tipo">
 			    </div>
 
 			</div>
@@ -32,16 +32,16 @@
 			    				<td class="td-center"><label>Fonte</label></td>
 			    				<td class="td-center"><label>Tamanho</label></td>
 			    				<td class="td-center"><label>Cor</label></td>
-			    				<td class="td-center"><label>Negrito</label></td>
-			    				<td class="td-center" style="width: 95px"><label>Italic</label></td>
-			    				<td class="td-center"><label>Sublinhado</label></td>
+			    				<td class="td-center" style="width: 70px"><label>Negrito</label></td>
+			    				<td class="td-center" style="width: 70px"><label>Italic</label></td>
+			    				<td class="td-center" style="width: 70px"><label>Sublinhado</label></td>
 			    			</tr>
 				    		<?php foreach($titulos as $titulo){?>
 				    			<tr>
-							    	<td><label><b><?php echo $titulo->nome ?></b><?php echo $titulo->descricao ?></label></td>
+							    	<td><label><?php echo $titulo->nome ;  echo $titulo->descricao ?></label></td>
 				    				<td>
 				    					<select class="form-control" name="fonte[]">
-				    						<option value="arial" style="font-family: arial">arial</option>
+				    						<option value="arial" style="font-family: arial" selected>arial</option>
 				    						<option value="comic sans ms" style="font-family:'comic sans ms'">Comic Sans MS</option>
 				    						<option value="courier new" style="font-family:'courier new'">Courier New</option>
 				    						<option value="georgia" style="font-family:'georgia'">Georgia</option>
@@ -57,7 +57,13 @@
 								    		<?php 
 								    			for($i = 1 ; $i < 73; $i++){
 								    				if($i % 2 == 0){?>
-								    					<option value="<?php echo $i ?>"><?php echo $i ?></option>
+								    					<option value="<?php echo $i ?>"
+								    						<?php
+								    							if($i == 12){
+								    								echo "selected";
+								    							}
+								    						?>
+								    					><?php echo $i ?></option>
 								    		  <?php }
 								    			}
 								    		?> 
@@ -66,17 +72,17 @@
 
 							    	<td>
 							    		<select class="form-control" name="cor[]">
-							    			<option value="preto" style="color: black;">Preto</option>
-							    			<option value="branco" style="color: white;">branco</option>
-							    			<option value="azul" style="color: blue;">Azul</option>
-							    			<option value="amarelo" style="color: yellow;">Amarelo</option>
-							    			<option value="vermelho" style="color: red;">Vermelho</option>
-							    			<option value="verde" style="color: green;">Verde</option>
+							    			<option value="black" style="color: black;" selected>Preto</option>
+							    			<option value="white" style="color: white;">branco</option>
+							    			<option value="blue" style="color: blue;">Azul</option>
+							    			<option value="yellow" style="color: yellow;">Amarelo</option>
+							    			<option value="red" style="color: red;">Vermelho</option>
+							    			<option value="green" style="color: green;">Verde</option>
 							    		</select>
 							    	</td>
 							    	<td class="td-center"><input type="checkbox" name="negrito[]" value="<?php echo $titulo->id?>"></td>
-							    	<td class="td-center"><input type="checkbox" name="italic[]" value="<?php echo $titulo->id?>">></td>
-							    	<td class="td-center"><input type="checkbox" name="sublinhado[]" value="<?php echo $titulo->id?>">></td>
+							    	<td class="td-center"><input type="checkbox" name="italic[]" value="<?php echo $titulo->id?>"></td>
+							    	<td class="td-center"><input type="checkbox" name="sublinhado[]" value="<?php echo $titulo->id?>"></td>
 						    	</tr>
 					    	<?php } ?>
 				    	</table>
