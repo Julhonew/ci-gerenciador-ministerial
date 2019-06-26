@@ -7,18 +7,17 @@ class Certificados_model extends CI_Model {
 		parent::__construct();
 	}
 
-	public function selectAll(){
+	public function getAll(){
 		$query = $this->db->get('tipo_cert');
 		return $query->result();
 	}
 
 	public function getTipoCertificado($id){
-		$sql = "SELECT a.id, a.nome, a.sexo, a.dt_nasc, a.mae, a.pai, a.dt_apr, b.tipo tipo_cert FROM certificados a 
-				inner join tipo_cert b on (a.tipo_cert = b.id)
-				where a.tipo_cert = $id;";
-		$query = $this->db->query($sql);
-
-		return $query->result();
+		$this->db->select('*');
+		$this->db->from('certificados');
+		$this->db->join('tipo_cert' , 'certificados.tipo_cert = tipo_cert.id');
+		$query = $this->db->get()->result();
+		return $query;
 	}
 
 	public function getTitulosCert(){
@@ -31,31 +30,28 @@ class Certificados_model extends CI_Model {
 		return $result->result();
 	}
 
+	public function deleteTipo($id){
+		$this->db->where('id',$id);
+		$this->db->delete('tipo_cert');
+
+		$this->db->where('id_cert',$id);
+		$this->db->delete('texto_cert');
+	}
+
 	public function save($tipo_cert,$texto_cert){
 
 		$this->db->insert('tipo_cert', $tipo_cert);
 		$id_cert = $this->db->insert_id('tipo_cert');
 		
 		foreach ($texto_cert as $titulo) {
-			$count = 0;
-			$tamanho = count($titulo) + 1;
-			foreach ($titulo as $key => $value){
-				if($count == 0){
-					$valores = $id_cert. ",";
-					$valores .= "'".$value. "'";	
-				}else if ($count < $tamanho && $count != 0){
-					if(!is_numeric($value)){
-						$valores .= ",". "'".$value."'";
-					}else{
-						$valores .= ','.$value ;
-					}
-				}
-			    $count++;
-			}
-
-			$sql = "INSERT INTO texto_cert (id_cert,fonte,cor,tamanho,negrito,italic,sublinhado)
-											VALUES($valores);";
-			$this->db->query($sql);
+			$this->db->insert('texto_cert', [ 'id_cert'     => $id_cert,
+											  'fonte'       => $titulo['fonte'],
+											  'cor'         => $titulo['cor'],
+											  'tamanho'		=> $titulo['tamanho'],
+											  'negrito'		=> $titulo['negrito'],
+											  'italic'		=> $titulo['italic'],
+											  'sublinhado'  => $titulo['sublinhado']
+											]);
 		}
 
 	}

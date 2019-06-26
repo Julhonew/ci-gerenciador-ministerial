@@ -27,7 +27,7 @@
 						<tr>
 							<form action="Membros/credencial" method="POST">
 							<td class="td-center"><input type="checkbox" name="id[]" value="<?php echo $certificado->id; ?>"></td>
-							<td class="td-center"><p><?php echo $certificado->tipo_cert; ?> </p></td>
+							<td class="td-center"><p><?php echo $certificado->tipo; ?> </p></td>
 							<td class="td-center"><p><?php echo $certificado->nome; ?> </p></td>
 							<td class="td-center"><p><?php echo implode('/', array_reverse(explode('-', $certificado->dt_apr))); ?> </p></td>
 							<td class="td-center">

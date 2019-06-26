@@ -9,7 +9,7 @@ class Certificados extends MY_Controller {
 	}
 
 	public function index(){
-		$data['certificados'] = $this->certificados_model->selectAll();
+		$data['certificados'] = $this->certificados_model->getAll();
 		$this->load->view('certificados/certificados', $data);
 	}
 
@@ -98,6 +98,12 @@ class Certificados extends MY_Controller {
 	public function tipoCertificados(){
 		$data['certificados'] = $this->certificados_model->getTipoCertificado($this->uri->segment(3));
 		$this->load->view('certificados/tipoCertificados', $data);
+	}
+
+	public function deleteTipoCertificados(){
+		
+		$this->certificados_model->deleteTipo($this->uri->segment(3));
+		redirect('certificados');
 	}
 
 }

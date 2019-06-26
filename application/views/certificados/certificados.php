@@ -24,6 +24,7 @@
 							<td class="td-center"><p><?php echo $certificado->tipo; ?></p></td>
 							<td class="td-center">
 								<a href="Certificados/tipoCertificados/<?php echo $certificado->id; ?>"><input class="btn btn-info" type="button" value="Ver todos"></a>
+								<a href="Certificados/deleteTipoCertificados/<?php echo $certificado->id; ?>"><input class="btn btn-danger" type="button" value="X"></a>
 							</td>
 						</tr>	
 				    <?php } ?> 
