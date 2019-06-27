@@ -1,4 +1,7 @@
-<?php $this->load->view('top')?>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed'); 
+$this->load->view('top.php'); 
+?>
 
 <div class="row col-md-12 ml-2">
 		<div class="col-md-2 "></div>
@@ -24,6 +27,7 @@
 							<td class="td-center"><p><?php echo $certificado->tipo; ?></p></td>
 							<td class="td-center">
 								<a href="Certificados/tipoCertificados/<?php echo $certificado->id; ?>"><input class="btn btn-info" type="button" value="Ver todos"></a>
+								<a href="Certificados/editarTipoCertificado/<?php echo $certificado->id; ?>"><input class="btn btn-info" type="button" value="Editar"></a>
 								<a href="Certificados/deleteTipoCertificados/<?php echo $certificado->id; ?>"><input class="btn btn-danger" type="button" value="X"></a>
 							</td>
 						</tr>	

@@ -1,4 +1,7 @@
-<?php $this->load->view('top.php'); ?>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed'); 
+$this->load->view('top.php'); 
+?>
 
 <div class="row">
 	<div class="col-md-6 offset-md-4">

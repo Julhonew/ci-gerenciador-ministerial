@@ -6,6 +6,7 @@ class Certificados extends MY_Controller {
 	public function __construct(){
 	    parent::__construct();
 		$this->load->model('certificados_model');
+		$this->load->model('membros_model');
 	}
 
 	public function index(){
@@ -95,14 +96,53 @@ class Certificados extends MY_Controller {
 		}
 	}
 
+	public function adicionarCertificado(){
+		
+		if(!empty($this->uri->segment(4))){
+
+			$membro = $this->membros_model->select($this->uri->segment(4));
+			echo "<pre>";
+			
+			$data = ['nome' 	=> $membro[0]->nome,
+					 'sexo' 	=> !empty($this->input->post('sexo')) ? $this->input->post('sexo') : NULL,
+					 'dt_nasc' 	=> $membro[0]->data_nasc,
+					 'mae' 		=> !empty($this->input->post('mae')) ? $this->input->post('mae') : NULL,
+					 'pai' 		=> !empty($this->input->post('pai')) ? $this->input->post('pai') : NULL,
+					 'dt_apr' 	=> !empty($this->input->post('dt_apr')) ? $this->input->post('dt_apr') : NULL,
+					 'tipo_cert'=> $this->uri->segment(3),
+					 'cargo' 	=> $membro[0]->cargo
+				    ];
+		    
+			$this->certificados_model->saveCertificado($data);
+
+			redirect('certificados/tipoCertificados/' . $this->uri->segment(3));
+		}else{
+			$data['nome'] = $this->certificados_model->getByIdTipo($this->uri->segment(3));
+			$data['membros'] = $this->membros_model->selectAll();
+			$this->load->view('certificados/adicionarCertificado',$data);
+		}
+		
+	}
+
+	public function editarTipoCertificado(){
+		//
+	}
+
 	public function tipoCertificados(){
-		$data['certificados'] = $this->certificados_model->getTipoCertificado($this->uri->segment(3));
+		$id = !empty($this->uri->segment(3)) ? $this->uri->segment(3) : redirect('certificados');
+		$data['certificados'] = $this->certificados_model->getTipoCertificado($id);
+		$data['nome'] = $this->certificados_model->getByIdTipo($id);
+
 		$this->load->view('certificados/tipoCertificados', $data);
 	}
 
 	public function deleteTipoCertificados(){
-		
 		$this->certificados_model->deleteTipo($this->uri->segment(3));
+		redirect('certificados');
+	}
+
+	public function deleteCertificado(){
+		$this->certificados_model->deleteCertificado($this->uri->segment(3));
 		redirect('certificados');
 	}
 
