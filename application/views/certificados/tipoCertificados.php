@@ -32,8 +32,7 @@ $this->load->view('top.php');
 							<td class="td-center"><p><?php echo implode('/', array_reverse(explode('-', $certificado->dt_apr))); ?> </p></td>
 							<td class="td-center">
 								<a href="Membros/credencial/<?php echo $certificado->id ?>" onClick="window.open(this.href,'credencial','resizable,height=800,width=800'); return false;"><input class="btn btn-info" type="button" value="Certificado"></a>
-								<a href="Membros/editar/<?php echo $certificado->id ?>"><input class="btn btn-info" type="button" value="Editar"></a>
-								<a href="Certificados/tipoCertificado/deleteCertificado/<?php echo $certificado->id ?>"><input class="btn btn-danger"  type="button" value="X"></a>
+								<a href="<?php echo site_url('Certificados/deleteCertificado/'.$nome[0]->id . '/' . $certificado->id)?>"><input class="btn btn-danger"  type="button" value="X"></a>
 							</td>
 						</tr>	
 				    <?php } ?> 

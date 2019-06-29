@@ -13,10 +13,10 @@ class Certificados_model extends CI_Model {
 	}
 
 	public function getTipoCertificado($id){
-		$this->db->select('*');
+		$this->db->where('tipo_cert',$id);
+		$this->db->select('* , certificados.id');
 		$this->db->from('certificados');
 		$this->db->join('tipo_cert' , 'certificados.tipo_cert = tipo_cert.id');	
-		$this->db->where('tipo_cert',$id);
 		$query = $this->db->get()->result();
 		return $query;
 	}
@@ -26,9 +26,16 @@ class Certificados_model extends CI_Model {
 		return $result->result();
 	}
 
-	public function getTipos(){
-		$result = $this->db->get('tipo_cert');
-		return $result->result();
+	public function getEditarTipo($id){
+		$this->db->where('id', $id);
+		$arr1 = $this->db->get('tipo_cert')->result();
+
+		$this->db->where('id_cert', $id);
+		$arr2 = $this->db->get('texto_cert')->result();
+
+		$data = array_merge($arr1, $arr2);
+
+		return $data;
 	}
 
 	public function getByIdTipo($id){
@@ -54,9 +61,12 @@ class Certificados_model extends CI_Model {
 	}
 
 	public function saveCertificado($data = []){
-		
-		$this->db->insert('certificados', $data);
-		
+		$this->db->insert('certificados', $data);	
+	}
+
+	public function getFontes(){
+		$query = $this->db->get('fontes')->result();
+		return $query;
 	}
 
 	public function save($tipo_cert,$texto_cert){

@@ -125,7 +125,14 @@ class Certificados extends MY_Controller {
 	}
 
 	public function editarTipoCertificado(){
-		//
+		$data['titulos'] = $data['titulos'] = $this->certificados_model->getTitulosCert();
+		$data['tipo'] = $this->certificados_model->getEditarTipo($this->uri->segment(3));
+		$data['fontes'] = $this->certificados_model->getFontes();
+		// echo "<pre>";
+		// var_dump($data['tipo']);
+		// exit;
+		
+		$this->load->view('certificados/editarTipo', $data);
 	}
 
 	public function tipoCertificados(){
@@ -142,8 +149,8 @@ class Certificados extends MY_Controller {
 	}
 
 	public function deleteCertificado(){
-		$this->certificados_model->deleteCertificado($this->uri->segment(3));
-		redirect('certificados');
+		$this->certificados_model->deleteCertificado($this->uri->segment(4));
+		redirect('certificados/tipoCertificados/' . $this->uri->segment(3));
 	}
 
 }
