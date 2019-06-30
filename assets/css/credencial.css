@@ -41,8 +41,10 @@
 }
 
 #dados_igreja{
+	margin-top: 2px;
 	text-align: center;
 	font-size: 8px;
+	font-weight: bold;
 }
 
 /*Div informações*/
@@ -109,9 +111,12 @@
 
 /*DIV rodapé*/
 #rodape{
+	margin-bottom: 5px;
 	width: 339px;
 	height: 20px;
-	font-size: 8px;
+	font-size: 10px;
+	font-weight: bold;
+	font-family: 'times new roman';
 	text-align: center;
 	clear: both;
 }
