@@ -125,13 +125,53 @@ class Certificados extends MY_Controller {
 	}
 
 	public function editarTipoCertificado(){
-		$data['titulos'] = $data['titulos'] = $this->certificados_model->getTitulosCert();
+		$data['titulos'] = $this->certificados_model->getTitulosCert();
 		$data['tipo'] = $this->certificados_model->getEditarTipo($this->uri->segment(3));
-		$data['fontes'] = $this->certificados_model->getFontes();
-		// echo "<pre>";
-		// var_dump($data['tipo']);
-		// exit;
-		
+		$arrFontes = $this->certificados_model->getFontes();
+		$arrCores = $this->certificados_model->getCores();
+
+		$arrFormatacaoCad = $data['tipo'];
+		unset($arrFormatacaoCad[0]);
+		sort($arrFormatacaoCad);
+
+		foreach ($arrFormatacaoCad as $FormatacaoCad) {
+			$fontesCad[] = $FormatacaoCad->fonte;
+			$coresCad[] = $FormatacaoCad->cor;
+
+		}
+		foreach ($arrFontes as $fonte) {
+			$fontes[] = $fonte->fonte; 
+		}
+		foreach ($arrCores as $cor) {
+			$cores[] = $cor->cor; 
+			$coresBr[] = $cor->traducao; 
+		}
+		foreach ($fontesCad as $key => $fonteCad) {
+			$verf = true;
+			for ($i=0; $i < 9; $i++) { 
+				if($verf && $fonteCad == $fontes[$i]){
+					$fontesVerf[$key][$i] = "<option value= " .  "'" .$fontes[$i] .  "'" . " selected " . "style = 'font-family: " . $fontes[$i] . "' >". $fontes[$i] . " </option>";
+					$verf = false;
+				}else{
+					$fontesVerf[$key][$i] = "<option value= " . "'" . $fontes[$i] . "'" . " style = 'font-family: " . $fontes[$i] . "' >". $fontes[$i] . " </option>"; 
+				}
+			}
+		}
+		foreach ($coresCad as $key => $corCad) {
+			$verf = true;
+			for ($i=0; $i < 6; $i++) { 
+				if($verf && $corCad == $cores[$i]){
+					$coresVerf[$key][$i] = "<option value= " .  "'" .$cores[$i] .  "'" . " selected " . "style = 'color: " . $cores[$i] . "' >". $coresBr[$i] . " </option>";
+					$verf = false;
+				}else{
+					$coresVerf[$key][$i] = "<option value= " . "'" . $cores[$i] . "'" . " style = 'color: " . $cores[$i] . "' >". $coresBr[$i] . " </option>"; 
+				}
+			}
+		}
+
+		$data['fontes'] = $fontesVerf;
+		$data['cores'] = $coresVerf;
+
 		$this->load->view('certificados/editarTipo', $data);
 	}
 

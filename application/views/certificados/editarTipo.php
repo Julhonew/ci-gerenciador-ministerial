@@ -1,9 +1,10 @@
 <?php
-	
-	$tipo_cert = $tipo[0];
-	unset($tipo[0]);
-	sort($tipo);
-	$texto_cert = $tipo;
+	$tipo_cert = $tipo;
+	unset($tipo_cert[0]);
+	sort($tipo_cert);
+
+	// var_dump($tipo_cert[0]->negrito);
+	// exit;
 
 	defined('BASEPATH') OR exit('No direct script access allowed'); 
 	$this->load->view('top.php'); 
@@ -18,7 +19,7 @@
 
 			    <div class="form-group col-md-8">
 				    <label for="formGroupExampleInput">Nome:</label>
-				    <input value="<?php echo $tipo_cert->tipo ?>" type="text" class="form-control" name="nome" placeholder="Nome do Tipo">
+				    <input value="<?php echo $tipo[0]->tipo ?>" type="text" class="form-control" name="nome" placeholder="Nome do Tipo">
 			    </div>
 
 			</div>
@@ -45,14 +46,16 @@
 			    				<td class="td-center" style="width: 70px"><label>Italic</label></td>
 			    				<td class="td-center" style="width: 70px"><label>Sublinhado</label></td>
 			    			</tr>
-				    		<?php foreach($titulos as $titulo){?>
+				    		<?php foreach($titulos as $key => $titulo){?>
 				    			<tr>
-							    	<td><label><?php echo $titulo->nome ;  echo $titulo->descricao ?></label></td>
+							    	<td><label><?php echo $titulo->nome?></label></td>
 				    				<td>
 				    					<select class="form-control" name="fonte[]">
-				    						<?php foreach($fontes as $fonte){ ?>
-				    							<option value="<?php echo $fonte->fonte ?>" style="font-family: <?php echo $fonte->fonte ?>"><?php echo $fonte->fonte ?></option>
-				    						<?php } ?>
+				    					<?php
+											for ($i=0; $i < 9 ; $i++) {
+												echo $fontes[$key][$i];
+											}
+										?>
 				    					</select>	
 				    				</td>
 								    <td class="td-center">
@@ -62,30 +65,29 @@
 								    				if($i % 2 == 0){?>
 								    					<option value="<?php echo $i ?>"
 								    						<?php
-								    							if($i == 12){
+								    							if($i == $tipo_cert[$key]->tamanho){
 								    								echo "selected";
 								    							}
 								    						?>
 								    					><?php echo $i ?></option>
 								    		  <?php }
-								    			}
+								    			$j++; }
 								    		?> 
 								    	</select>
 							    	</td>
 
 							    	<td>
 							    		<select class="form-control" name="cor[]">
-							    			<option value="black" style="color: black;" selected>Preto</option>
-							    			<option value="white" style="color: white;">branco</option>
-							    			<option value="blue" style="color: blue;">Azul</option>
-							    			<option value="yellow" style="color: yellow;">Amarelo</option>
-							    			<option value="red" style="color: red;">Vermelho</option>
-							    			<option value="green" style="color: green;">Verde</option>
+							    			<?php
+												for ($i=0; $i < 6; $i++) {
+													echo $cores[$key][$i];
+												}
+											?>
 							    		</select>
 							    	</td>
-							    	<td class="td-center"><input type="checkbox" name="negrito[]" value="<?php echo $titulo->id?>"></td>
-							    	<td class="td-center"><input type="checkbox" name="italic[]" value="<?php echo $titulo->id?>"></td>
-							    	<td class="td-center"><input type="checkbox" name="sublinhado[]" value="<?php echo $titulo->id?>"></td>
+							    	<td class="td-center"><input type="checkbox" <?php echo $tipo_cert[$key]->negrito ? 'checked' : '' ?> name="negrito[]" value="<?php echo $titulo->id?>"></td>
+							    	<td class="td-center"><input type="checkbox" <?php echo $tipo_cert[$key]->italic ? 'checked' : '' ?> name="italic[]" value="<?php echo $titulo->id?>"></td>
+							    	<td class="td-center"><input type="checkbox" <?php echo $tipo_cert[$key]->sublinhado ? 'checked' : '' ?> name="sublinhado[]" value="<?php echo $titulo->id?>"></td>
 						    	</tr>
 					    	<?php } ?>
 				    	</table>
@@ -96,7 +98,7 @@
 		    <div class="form-row">
 				<div class="form-group col-md-12">
 				    <label for="formGroupExampleInput">Texto:</label><br>
-			        <textarea name="editor" id="editor"><?php echo $tipo_cert->texto ?></textarea>
+			        <textarea name="editor" id="editor"><?php echo $tipo[0]->texto ?></textarea>
 			    </div>
 		    </div>
 

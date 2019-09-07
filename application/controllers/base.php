@@ -10,4 +10,16 @@ class home extends MY_Controller {
 	public function index(){
 		//
 	}
+
+	public function adicionar(){
+
+	}
+
+	public function editar(){
+
+	}
+
+	public function excluir(){
+
+	}
 }

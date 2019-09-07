@@ -65,7 +65,13 @@ class Certificados_model extends CI_Model {
 	}
 
 	public function getFontes(){
+		$this->db->select('fonte');
 		$query = $this->db->get('fontes')->result();
+		return $query;
+	}
+
+	public function getCores(){
+		$query = $this->db->get('cores')->result();
 		return $query;
 	}
 
